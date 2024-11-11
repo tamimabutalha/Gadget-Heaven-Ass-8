@@ -1,46 +1,34 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import MainLayout from "../layouts/mainLayout";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
-import Deatails from "../pages/Deatails";
+import GadgetsDetails from "../pages/Deatails";
+ // Correct spelling here
 
 const routes = createBrowserRouter([
     {
-      path: '/',
-      element: <MainLayout></MainLayout>,
-      children: [
-
-        {
-            path: '/',
-            element: <Home></Home>,
-            // loader: () => fetch("../../public/gadgets.json"),
-            // children: [
-            //     {
-            //         path: "/gadgets/:id",
-            //         element: <GadgetsDetails/>
-            //     }
-            // ]
-        },
-        {
-            path: 'GadgetsSection/:product_id',
-            element: <Deatails></Deatails>,
-            loader: () => fetch('/gadgets.json')
-        },
-        {
-            path: './Dashboard',
-            element: <Dashboard></Dashboard>,
-        },
-        {
-            path: '/Deatails',
-            element: <Deatails></Deatails>
-        }
-
-      ]
+        path: '/',
+        element: <MainLayout />,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/gadgets-section/:product_id',
+                element: <GadgetsDetails />,
+                loader: async () => {
+                    const response = await fetch('../../public/gadgets.json');
+                    const data = await response.json();
+                    return data;  
+                },
+            },
+            {
+                path: '/dashboard',
+                element: <Dashboard />,
+            }
+        ],
     },
-  ])
+]);
 
-
-export default routes
-
-  
+export default routes;

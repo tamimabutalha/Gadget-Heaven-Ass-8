@@ -1,4 +1,5 @@
 
+import CategoriesSidebar from "../components/CategoriesSidebar";
 import GadgetsSection from "../components/GadgetsSection";
 import Hero from "../components/Hero";
 
@@ -8,6 +9,7 @@ const Home = () => {
         <Hero/>
         <br />
         <GadgetsSection/>
+        
         
         </>
     );
